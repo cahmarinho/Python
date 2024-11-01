@@ -1,0 +1,153 @@
+import os
+
+# VARIÁVEL PARA REPETIR O PROGRAMA SE O USUÁRIO ESCOLHER JOGAR DE NOVO
+repetir = 0
+
+# LOOP RESPONSÁVEL POR REINICIAR O JOGO, A VARIÁVEL REPETIR SÓ MUDA O VALOR QUANDO O JOGADOR NÃO QUER JOGAR NOVAMENTE, 
+# ENTÃO O LOOP NÃO ACONTECE E O PROGRAMA É FINALIZADO
+
+while repetir == 0:
+    print('''============================== JOGO DA FORCA ===================================
+
+    Informações para jogar: 
+
+    - Você tem 6 vidas
+    - Receberá uma dica para acertar a palavra
+
+    Vamos começar!!
+    ''')
+
+    comeca = input("Precione a tecla ENTER para começar")
+
+    # DEFINIÇÃO DA PALAVRA A SER SORTEADA
+    palavra = "penteadeira".lower()
+    
+    # DICA DA PALAVRA
+    dica = "objeto"
+    
+    # QUANTIDADE DE VIDAS
+    vida = 6
+    palavra_escondida = ["_" for _ in palavra]
+    letras_erradas = []
+    letras_certas = []
+    erros = 0
+    
+    while vida > 0:
+        
+        print(f"\nSua dica é: {dica}")
+        tamanho_palavra = len(palavra)
+        print(f"Quantidade de letras: {tamanho_palavra}")
+        print(f"Suas vidas: {vida}")
+        
+        letra_usuario = input("\nInforme uma letra: ").lower()
+        palavra_escondida = list(palavra_escondida)
+        
+        acertou = False
+        
+        os.system('cls')
+        
+        if letra_usuario in letras_erradas or letra_usuario in palavra_escondida:
+            print("\nEssa letra já foi, tente outra")
+            continue
+        
+        
+
+        for posicao in range(tamanho_palavra):
+            if palavra[posicao] == letra_usuario:
+                palavra_escondida[posicao] = letra_usuario
+                acertou = True
+        
+        if acertou:
+            letras_certas.append(letra_usuario)
+            print("\nVocê acertou a letra, parabéns")
+        
+            
+        else:
+            letras_erradas.append(letra_usuario)
+            vida -= 1
+            erros +=1
+            print(f"\nA palavra não tem essa letra, agora você tem {vida} de vida")
+            
+        if erros == 0:
+            print(" __________ ")
+            print(" |/       | ")
+            print(" |          ")
+            print(" |          ")
+            print(" |          ")
+            print(" |          ")
+            print("_|___       ") 
+               
+        if erros == 1:
+            print(" __________  ")
+            print(" |/       |  ")
+            print(" |       (_) ")
+            print(" |           ")
+            print(" |           ")
+            print(" |           ")
+            print("_|___        ")
+            
+        if erros == 2:
+            print(" __________  ")
+            print(" |/       |  ")
+            print(" |       (_) ")
+            print(" |        |  ")
+            print(" |        |  ")
+            print(" |           ")
+            print("_|___        ")
+            
+        if erros == 3:
+            print(" __________  ")
+            print(" |/       |  ")
+            print(" |       (_) ")
+            print(" |       \|  ")
+            print(" |        |  ")
+            print(" |           ")
+            print("_|___        ")
+            
+        if erros == 4:
+            print(" __________  ")
+            print(" |/       |  ")
+            print(" |       (_) ")
+            print(" |       \|/ ")
+            print(" |        |  ")
+            print(" |           ")
+            print("_|___        ")
+            
+        if erros == 5:
+            print(" __________  ")
+            print(" |/       |  ")
+            print(" |       (_) ")
+            print(" |       \|/ ")
+            print(" |        |  ")
+            print(" |       /   ")
+            print("_|___        ")
+            
+        if erros == 6:
+            print(" __________  ")
+            print(" |/       |  ")
+            print(" |       (_) ")
+            print(" |       \|/ ")
+            print(" |        |  ")
+            print(" |       / \ ")
+            print("_|___        ")
+            
+        print("\n==================================== Letras que já foram =====================================")    
+        print(f"Letras que foram erradas: {', '.join(letras_erradas)}")
+        print(f"Letras que foram certas: {', '.join(letras_certas)}")
+        print(f"\nPalavra atual: {' '.join(palavra_escondida)}")
+        
+        if '_' not in palavra_escondida:
+            print("Você acertou a palavra, parabéns!")
+            break
+    else:
+        print(f"Que pena você perdeu, suas vidas acabaram :( a palavra era: {palavra}")
+    
+    continuar = int(input('''Deseja jogar de novo?
+    1 - sim
+    2 - não'''))
+    
+    if continuar == 1:
+        os.system('cls')
+    else:
+        os.system('cls')
+        repetir += 1
