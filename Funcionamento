@@ -44,7 +44,7 @@ erros = 0
 palavra: Define a palavra a ser adivinhada, convertida para minúsculas.
 dica: Uma dica sobre oque é a palavra 
 vida: O número de tentativas que o jogador tem (6 vidas).
-palavra_escondida: Cria uma lista com underscores (_) representando cada letra da palavra. Inicialmente, a palavra não é revelada.
+palavra_escondida: Cria uma lista com underlines (_) representando cada letra da palavra. Inicialmente, a palavra não é revelada.
 letras_erradas: Lista para armazenar letras que o jogador tentou e não estavam na palavra.
 letras_certas: Lista para armazenar letras que o jogador adivinhou corretamente.
 erros: Contador para rastrear quantas letras erradas foram tentadas.
