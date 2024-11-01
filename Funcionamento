@@ -1,0 +1,114 @@
+Nesta apresentação,  nosso objetivo é descrever de forma clara e objetiva as funcionalidades dos códigos que foram desenvolvidos.
+Explicando seu propósito e como contribuem para o funcionamento geral do sistema. 
+
+import os
+Essa linha importa o módulo os, que permite interagir com o sistema operacional, como limpar a tela.
+
+repetir = 0
+ A variável repetir controla se o jogo deve ser reiniciado. Quando o jogador não quiser jogar novamente, ela mudará de valor.
+
+ Loop Principal do Jogo
+while repetir == 0:
+ Este loop executa todo o jogo da forca. Ele continuará rodando enquanto repetir for igual a 0.
+Se o jogador decidir não jogar novamente, repetir será alterado, encerrando o loop.
+
+Dentro do loop principal, há um segundo loop:
+while vida > 0:
+Este loop permite que o jogador faça tentativas de adivinhação enquanto ainda tiver vidas. O jogo termina se o jogador perder todas as vidas.
+
+Introdução do jogo:
+print('''============================== JOGO DA FORCA ===================================
+
+Informações para jogar: 
+
+- Você tem 6 vidas
+- Receberá uma dica para acertar a palavra
+
+Vamos começar!!
+''')
+Exibe uma mensagem de introdução que informa o jogador sobre as regras do jogo e como jogá-lo.
+
+comeca = input("Precione a tecla ENTER para começar")
+ Aguarda o jogador pressionar a tecla Enter para iniciar o jogo.
+
+
+Variáveis:
+palavra = "penteadeira".lower()
+dica = "objeto"
+vida = 6
+palavra_escondida = ["_" for _ in palavra]
+letras_erradas = []
+letras_certas = []
+erros = 0
+
+palavra: Define a palavra a ser adivinhada, convertida para minúsculas.
+dica: Uma dica sobre oque é a palavra 
+vida: O número de tentativas que o jogador tem (6 vidas).
+palavra_escondida: Cria uma lista com underscores (_) representando cada letra da palavra. Inicialmente, a palavra não é revelada.
+letras_erradas: Lista para armazenar letras que o jogador tentou e não estavam na palavra.
+letras_certas: Lista para armazenar letras que o jogador adivinhou corretamente.
+erros: Contador para rastrear quantas letras erradas foram tentadas.
+
+print(f"\nSua dica é: {dica}")
+tamanho_palavra = len(palavra)
+print(f"Quantidade de letras: {tamanho_palavra}")
+print(f"Suas vidas: {vida}")
+
+ Exibe a dica da palavra, o tamanho da palavra e quantas vidas ainda restam.
+
+letra_usuario = input("\nInforme uma letra: ").lower()
+
+Pede ao jogador que informe uma letra e a converte para minúsculas para garantir que a comparação com a palavra seja consistente.
+
+if letra_usuario in letras_erradas or letra_usuario in palavra_escondida:
+    print("\nEssa letra já foi, tente outra")
+    continue
+
+Verifica se a letra já foi tentada (se está nas listas de letras erradas ou certas). Se sim, exibe uma mensagem e reinicia o loop, pedindo uma nova letra.
+
+
+for posicao in range(tamanho_palavra):
+    if palavra[posicao] == letra_usuario:
+        palavra_escondida[posicao] = letra_usuario
+        acertou = True
+Percorre cada letra da palavra e verifica se a letra informada pelo usuário está correta. Se estiver, a letra correta é adicionada à lista palavra_escondida, e acertou é definido como True.
+
+if acertou:
+    letras_certas.append(letra_usuario)
+    print("\nVocê acertou a letra, parabéns")
+else:
+    letras_erradas.append(letra_usuario)
+    vida -= 1
+    erros += 1
+    print(f"\nA palavra não tem essa letra, agora você tem {vida} de vida")
+
+Se a letra foi acertada, é adicionada à lista letras_certas, e uma mensagem de parabéns é exibida.
+Se a letra não está na palavra, é adicionada à lista letras_erradas, a vida do jogador é diminuída, o contador de erros é incrementado e uma mensagem é exibida informando sobre a perda de vida.
+
+Exibe as letras já tentadas pelo jogador, tanto as erradas quanto as certas, além da palavra atual com as letras adivinhadas.
+
+
+if '_' not in palavra_escondida:
+    print("Você acertou a palavra, parabéns!")
+    break
+Verifica se não há mais underscores na palavra_escondida. Se não houver, significa que o jogador acertou todas as letras e uma mensagem de vitória é exibida, encerrando o loop.
+
+
+else:
+    print(f"Que pena você perdeu, suas vidas acabaram :( a palavra era: {palavra}")
+Se o loop do jogo termina sem o jogador ter acertado a palavra, uma mensagem de derrota é exibida, informando a palavra correta.
+
+continuar = int(input('''Deseja jogar de novo?
+1 - sim
+2 - não'''))
+ Pergunta ao jogador se ele deseja jogar novamente. A resposta é armazenada na variável
+
+
+if continuar == 1:
+    os.system('cls')
+else:
+    os.system('cls')
+    repetir += 1
+Se o jogador optar por jogar novamente, a tela é limpa. Caso contrário, a variável repetir é incrementada para sair do loop principal, encerrando o jogo.
+
+os.system('cls'), que é um comando para limpar a tela do console.
